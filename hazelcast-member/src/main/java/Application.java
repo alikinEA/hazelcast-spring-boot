@@ -40,6 +40,7 @@ public class Application {
         for (String ip : nodesArr) {
             tcpIpConf.addMember(ip);
         }
+        tcpIpConf.addMember(pubaddress);
         tcpIpConf.setEnabled(true);
         network.setPublicAddress(pubaddress);
         return config;
