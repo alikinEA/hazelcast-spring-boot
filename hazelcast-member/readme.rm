@@ -1,8 +1,8 @@
 admin - ui
 
 build image : docker build -t hazelcast-member . --force-rm=true
-run : docker run -d -e JAVA_OPTS="-Xms2048M -Xmx2048M -Dmancenter=http://10.243.5.39:8091/mancenter -Dnodes=10.243.5.39:5701,10.243.5.39:5702 -Dpubaddress=10.243.5.39:5701" -p 5701:5701 -p 8081:8081 --name hazelcast-member1 -t hazelcast-member
-run : docker run -d -e JAVA_OPTS="-Xms2048M -Xmx2048M -Dmancenter=http://10.243.5.39:8091/mancenter -Dnodes=10.243.5.39:5701,10.243.5.39:5702 -Dpubaddress=10.243.5.39:5702" -p 5702:5701 -p 8082:8081 --name hazelcast-member2 -t hazelcast-member
+run : docker run -d -e JAVA_OPTS="-Xms2048M -Xmx2048M -Dmancenter=http://10.242.4.142:8091/mancenter -Dnodes=10.242.4.142:5701,10.243.5.39:5701 -Dpubaddress=10.243.5.39:5701" -p 5701:5701 --name hazelcast-member -t hazelcast-member
+run : docker run -d -e JAVA_OPTS="-Xms2048M -Xmx2048M -Dmancenter=http://10.242.4.142:8091/mancenter -Dnodes=10.242.4.142:5701,10.243.5.39:5701 -Dpubaddress=10.242.4.142:5701" -p 5701:5701 --name hazelcast-member -t hazelcast-member
 
 
 
