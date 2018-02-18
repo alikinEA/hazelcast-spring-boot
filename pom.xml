@@ -15,6 +15,7 @@
     <modules>
         <module>admin-ui</module>
         <module>hazelcast-member</module>
+        <module>hazelcast-client</module>
     </modules>
     <dependencies>
         <dependency>

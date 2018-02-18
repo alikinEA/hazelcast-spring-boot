@@ -35,12 +35,17 @@ public class Application {
         NetworkConfig network = config.getNetworkConfig();
         JoinConfig join = network.getJoin();
         join.getMulticastConfig().setEnabled(false);
-        String[] nodesArr = nodes.split(",");
+        String[] addresses ;
+        if (nodes.contains(",")) {
+            addresses = nodes.split(",");
+        } else {
+            addresses = new String[1];
+            addresses[0] = nodes;
+        }
         TcpIpConfig tcpIpConf = join.getTcpIpConfig();
-        for (String ip : nodesArr) {
+        for (String ip : addresses) {
             tcpIpConf.addMember(ip);
         }
-        tcpIpConf.addMember(pubaddress);
         tcpIpConf.setEnabled(true);
         network.setPublicAddress(pubaddress);
         return config;
