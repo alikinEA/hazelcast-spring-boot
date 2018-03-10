@@ -1,0 +1,13 @@
+version: '2'
+services:
+  consul:
+      image: "hazelcast/management-center"
+      container_name: "mancenter"
+      ports:
+        - "8082:8080"
+  admin-ui:
+    container_name: "admin"
+    build: ./admin-ui
+    ports:
+      - "8081:8080"
+

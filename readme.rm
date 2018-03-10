@@ -1,11 +1,9 @@
-Module (admin-ui)
+UI
 1. build project : clean install
-2. build image : docker build -t admin . --force-rm=true
-3. run : docker run -d -p 8081:8080 --name admin -t admin
+2. docker-compose up -d
 
 
 Module (hazelcast-member)
-1. run mancenter(official hazelcast image) : docker run -d -ti -p 8082:8080 hazelcast/management-center
 2. build project : clean install
 3. build image : docker build -t hazelcast-member . --force-rm=true
 4. run first member : docker run -d -e JAVA_OPTS="-Xms2048M -Xmx2048M -Dmancenter=http://hostManCenter:8082/mancenter -Dnodes=host1member:5701,host2member:5701 -Dpubaddress=host1member:5701" -p 5701:5701 --name hazelcast-member -t hazelcast-member
