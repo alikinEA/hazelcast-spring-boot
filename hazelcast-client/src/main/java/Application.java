@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Created by Alikin E.A. on 11.02.18.
  */
-@ComponentScan(basePackages = {"model","resource","service"})
+@ComponentScan(basePackages = {"model","resource","service","config"})
 @EnableAutoConfiguration
 @Configuration
 public class Application {
