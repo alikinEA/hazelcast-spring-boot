@@ -4,6 +4,7 @@ import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;
 import com.hazelcast.core.HazelcastInstance;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,23 +15,32 @@ import java.util.List;
 public class HazelcastClientInstance {
 
     @Value("${hazelCastNodes}")
-    private String hazelCastNodes;
+    private String hazelcastNodes;
 
     private static final int TIMEOUT = 1000;
 
-    public HazelcastInstance getHCInstance() {
+    private HazelcastInstance hzClient;
+
+    private HazelcastInstance init() {
         ClientConfig clientConfig = new ClientConfig();
-        String[] addresses ;
-        if (hazelCastNodes.contains(",")) {
-            addresses = hazelCastNodes.split(",");
-        } else {
-            addresses = new String[1];
-            addresses[0] = hazelCastNodes;
-        }
-        clientConfig.getNetworkConfig().addAddress(addresses)
+        clientConfig.getNetworkConfig().addAddress(hazelcastNodes.split(","))
                 .setConnectionTimeout(TIMEOUT);
         HazelcastInstance hzClient
                 = HazelcastClient.newHazelcastClient(clientConfig);
         return hzClient;
+    }
+
+    protected HazelcastInstance getHZInstance() {
+        synchronized(this) {
+            if (hzClient == null) {
+                hzClient = init();
+            } else {
+                if (!hzClient.getLifecycleService().isRunning()) {
+                    hzClient.shutdown();
+                    hzClient = init();
+                }
+            }
+            return hzClient;
+        }
     }
 }

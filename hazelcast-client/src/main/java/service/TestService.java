@@ -17,7 +17,7 @@ public class TestService extends HazelcastClientInstance {
     private static final String COLLECTION_NAME = "testReplicatedMap";
 
     public TestPojo get(Integer id) {
-        HazelcastInstance hazelcastInstance = getHCInstance();
+        HazelcastInstance hazelcastInstance = getHZInstance();
         try {
             Map<Integer, String> map = hazelcastInstance.getReplicatedMap(COLLECTION_NAME);
             String cacheStr = map.get(id);
@@ -29,13 +29,11 @@ public class TestService extends HazelcastClientInstance {
             }
         } catch (Exception e) {
             throw new RuntimeException("Error get", e);
-        } finally {
-            hazelcastInstance.shutdown();
         }
     }
 
     public TestPojo put(Integer id,TestPojo object) {
-        HazelcastInstance hazelcastInstance = getHCInstance();
+        HazelcastInstance hazelcastInstance = getHZInstance();
         try {
             Map<Integer, String> map = hazelcastInstance.getReplicatedMap(COLLECTION_NAME);
             ObjectMapper mapper = new ObjectMapper();
@@ -43,13 +41,11 @@ public class TestService extends HazelcastClientInstance {
             return object;
         } catch (Exception e) {
             throw new RuntimeException("Error put", e);
-        } finally {
-            hazelcastInstance.shutdown();
         }
     }
 
     public TestPojo remove(Integer id) {
-        HazelcastInstance hazelcastInstance = getHCInstance();
+        HazelcastInstance hazelcastInstance = getHZInstance();
         try {
             Map<Integer, String> map = hazelcastInstance.getReplicatedMap(COLLECTION_NAME);
             String cacheStr = map.remove(id);
@@ -61,20 +57,16 @@ public class TestService extends HazelcastClientInstance {
             }
         } catch (Exception e) {
             throw new RuntimeException("Error remove", e);
-        } finally {
-            hazelcastInstance.shutdown();
         }
     }
 
     public void clear() {
-        HazelcastInstance hazelcastInstance = getHCInstance();
+        HazelcastInstance hazelcastInstance = getHZInstance();
         try {
             Map<Integer, String> map = hazelcastInstance.getReplicatedMap(COLLECTION_NAME);
             map.clear();
         } catch (Exception e) {
             throw new RuntimeException("Error clear", e);
-        } finally {
-            hazelcastInstance.shutdown();
         }
     }
 
