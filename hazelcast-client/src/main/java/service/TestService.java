@@ -29,6 +29,8 @@ public class TestService extends HazelcastClientInstance {
             }
         } catch (Exception e) {
             throw new RuntimeException("Error get", e);
+        } finally {
+            hazelcastInstance.shutdown();
         }
     }
 
@@ -41,6 +43,8 @@ public class TestService extends HazelcastClientInstance {
             return object;
         } catch (Exception e) {
             throw new RuntimeException("Error put", e);
+        } finally {
+            hazelcastInstance.shutdown();
         }
     }
 
@@ -57,6 +61,8 @@ public class TestService extends HazelcastClientInstance {
             }
         } catch (Exception e) {
             throw new RuntimeException("Error remove", e);
+        } finally {
+            hazelcastInstance.shutdown();
         }
     }
 
@@ -67,6 +73,8 @@ public class TestService extends HazelcastClientInstance {
             map.clear();
         } catch (Exception e) {
             throw new RuntimeException("Error clear", e);
+        } finally {
+            hazelcastInstance.shutdown();
         }
     }
 
